@@ -2,29 +2,28 @@ const appData = {
     chart: null,
     chartResolution:'continent-chart',
     chosenContinent: '',
-    chosenCountry: '',
+    chosenCountry: {
+        name: null,
+        population: null,
+        updated: null,
+        chartData: null,
+        timeline: null
+    },
     chosenCountryCovidStats: null,
     countriesCovidStats: null,
     continentCovidStats: null,
     currCheckedStatCategoryInput: null,
-    currSelectedCharTypeInput: null,
+    currSelectedChartTypeInput: null,
     currCharType: null,
-    getCountriesStats(){
-        return this.countriesCovidStats
-    },
-    getContinentStats(){
-        return this.continentStats
-    }
 }
 
 async function getRegionCovidData(e) {
-    // return
-    // TODO get an input select value 
+    const spinnerElement = dqs('.spinner-container')
+    removeClass(spinnerElement,'hide')
     const regionUserInput = (e.target.getAttribute('data-continent'))
     appData.chosenContinent = regionUserInput
     const url = `https://intense-mesa-62220.herokuapp.com/https://restcountries.herokuapp.com/api/v1/region/${regionUserInput}`
     let countriesCodes
-    // let regionData
     if (!localStorage.getItem(regionUserInput)) {
         const regionData = await axios.get(url)
         countriesCodes = getCountriesCodes(regionData)
@@ -36,7 +35,7 @@ async function getRegionCovidData(e) {
     const countriesCovidData = await getCovidData(countriesCodes)
     // localStorage.setItem('temp_covid_data', JSON.stringify(countriesCovidData))
     runStats(countriesCovidData)
-    console.log(countriesCovidData)
+    addClass(spinnerElement,'hide')
     scrollToSectionElement('.choose-continent','.continent-chart-section')
 }
 
@@ -65,13 +64,12 @@ async function getCovidData(countryCodesArr) {
 function runStats(countries) {
     // const countries = JSON.parse(localStorage.getItem('temp_covid_data'))
     const countriesStats = getCountryCovidStats(countries)
+    console.log('with timeline: ',countriesStats)
     const continentStats = getContinentStats(countriesStats)
     appData.countriesCovidStats = countriesStats
     appData.continentCovidStats = continentStats
 
     makeChart('continent-chart')
-    console.log('countries stats: ',countriesStats)
-    console.log('continents stats: ',continentStats)
 }
 
 
@@ -79,11 +77,10 @@ function getCountryCovidStats(countryObjs) {
     return countryObjs.map(country => {
         const { data } = country
         const { data: newData } = data
-        const { name, population } = newData
-        const { latest_data } = newData
+        const { name, population, latest_data,timeline,updated_at } = newData
         const { confirmed, critical, deaths, recovered } = latest_data
         return {
-            name, confirmed, critical, deaths, recovered, population
+            name, confirmed, critical, deaths, recovered, population,timeline, updated_at
         }
     })
 }

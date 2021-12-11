@@ -31,6 +31,38 @@ main  {
     align-items: center;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 ul {
     list-style: none;
 }
+
+.spinner-container {
+    position: absolute;
+    z-index: 2;
+    /* transform: translate(50%,50%); */
+    height: 100vh;
+    width: 100vw;
+}
+.spinner {
+    animation: spin 2s linear infinite;
+
+}
+
+@keyframes spin {
+0% {
+    color:hotpink;
+    transform: rotate(0);
+}
+20% {color:indianred;}
+40% {color: indigo;}
+60% {color: greenyellow;}
+80% {color: rebeccapurple;}
+100% {
+    color: red;
+    transform: rotate(360deg);
+    }
+}
+

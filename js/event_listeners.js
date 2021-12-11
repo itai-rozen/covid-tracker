@@ -20,18 +20,25 @@ function scrollToSectionElement(fromClass, toClass){
     },500)
 }
 
+function activateRadioButtons(type){
+    console.log('hello activate')
+    const statItemsElements = dqsa(`.radio-${type}`)
+    statItemsElements.forEach(radioButton => {
+        if (radioButton.checked){
+            appData.currCheckedStatCategoryInput = radioButton.value
+            console.log('found checked radio button! ', radioButton, radioButton.value)
+        } 
+        radioButton.addEventListener('click',setNewValueAndDrawChart)
+    })
+    console.log('current cateory input: ',appData.currCheckedStatCategoryInput)
+}
+    
 
-const statItemsElements = dqsa('.radio')
-statItemsElements.forEach(radioButton => {
-    if (radioButton.checked) appData.currCheckedStatCategoryInput = radioButton.value
-    radioButton.addEventListener('click',setNewValueAndDrawChart)
-
-})
 
 
 const optionSelectInputs = dqsa('.chart-option')
 optionSelectInputs.forEach(option => {
-    if (option.selected) appData.currSelectedCharTypeInput = option.value
+    if (option.selected) appData.currSelectedChartTypeInput = option.value
 })
 
 const selectInputs = dqsa('.chart-type-select')
@@ -42,7 +49,7 @@ selectInputs.forEach(input => input.addEventListener('change', setNewValueAndDra
 function setNewValueAndDrawChart(e){
     appData.chart.destroy()
     if (e.type === 'click') appData.currCheckedStatCategoryInput = e.target.value
-    else appData.currSelectedCharTypeInput = e.target.value
+    else appData.currSelectedChartTypeInput = e.target.value
     makeChart(appData.chartResolution)
 }
 
@@ -51,11 +58,22 @@ function updateCountriesSelectInput(names){
     const strHtmls = names.map(name => `
     <option class="country-option" value="${name}">${name}</option>
     `)
-    selectInputElement.innerHTML = strHtmls.join('')
+    selectInputElement.innerHTML += strHtmls.join('')
     selectInputElement.addEventListener('change', makeCountryChart)
 }
 
 
+dqs('.back-continent').addEventListener('click', () => {
+    appData.chart.destroy()
+    dqs('.default-option').checked
+    makeChart('continent-chart')
+    appData.chartResolution = 'continent-chart'
+    scrollToSectionElement('.country-section','.continent-chart-section')
+})
+dqs('.back-choose').addEventListener('click', () => {
+    appData.chart.destroy()
+    scrollToSectionElement('.continent-chart-section','.choose-continent')
+})
 
 console.log(appData)
 
