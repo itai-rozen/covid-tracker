@@ -1,0 +1,10 @@
+.country-chart-container {
+    position: relative; 
+    margin: 0 auto;
+    width: 100%;
+}
+
+#country-chart {
+    position: absolute;
+    width: 85vw;
+}

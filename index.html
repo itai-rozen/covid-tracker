@@ -1,14 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Covid Tracker</title>
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/world-map.css">
+    <link rel="stylesheet" href="css/continent-section.css">
+    <link rel="stylesheet" href="css/country-section.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/util.js" defer></script>
+    <script src="js/chart.js" defer></script>
     <script src="js/main.js" defer></script>
+    <script src="js/event_listeners.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
 </head>
+
 <body>
-    
+    <main class="choose-continent">
+        <div class="world">
+            <div data-continent="asia" class="continent asia">
+                <div data-continent="asia" class="continent-text"> Asia</div>
+            </div>
+            <div data-continent="europe" class="continent europe">
+                <div data-continent="europe" class="continent-text"> Europe</div>
+            </div>
+            <div data-continent="africa" class="continent africa">
+                <div data-continent="africa" class="continent-text"> Africa</div>
+            </div>
+            <div data-continent="americas" class="continent north-america">
+                <div data-continent="americas" class="continent-text"></div>
+            </div>
+            <div data-continent="americas" class="continent south-america">
+                <div data-continent="americas" class="continent-text">America</div>
+            </div>
+            <div data-continent="oceania" class="continent australia">
+                <div data-continent="oceania" class="continent-text">Australia</div>
+            </div>
+        </div>
+    </main>
+    <section class="continent-chart-section hide flex col">
+        <div class="inputs-container flex ">
+
+            <ul class="stats-option-list flex center">
+                <li class="stat-item"><label for="radio-1" class="radio-label label-1">Recovered</label><input
+                        type="radio" id="radio-1" value="recovered" class="radio"></li>
+                <li class="stat-item"><label for="radio-2" class="radio-label label-2">Confirmed</label><input
+                        type="radio" id="radio-2" value="confirmed" checked class="radio"></li>
+                <li class="stat-item"><label for="radio-3" class="radio-label label-3">Critical</label><input
+                        type="radio" id="radio-3" value="critical" class="radio"></li>
+                <li class="stat-item"><label for="radio-4" class="radio-label label-4">Deaths</label>
+                    <input type="radio" id="radio-4" value="deaths" class="radio"></li>
+                <li class="stat-item"><label for="radio-5" class="radio-label label-4">Overall</label>
+                    <input type="radio" id="radio-5" value="overall" class="radio"></li>
+            </ul>
+            <label class="flex">Chart type
+                <select  class="chart-type-select" id="">
+                    <option class="chart-option" selected value="bar" selected>Bar</option>
+                    <option class="chart-option" value="pie">Pie</option>
+                    <option class="chart-option" value="line">Line</option>
+                </select>
+            </label>
+            <label>Get more information on</label>
+            <select class="countries-select">
+            </select>
+        </div>
+
+        <div class="continent-chart-container" style="position: relative; height:40vh; width:80vw">
+            <canvas id="continent-chart" responsive="true"></canvas>
+        </div>
+        <div class="countries-list-container">
+            <ul class="country-list flex">
+            </ul>
+        </div>
+
+
+    </section>
+    <section class="country-section hide flex col">
+        <h1 class="country-header"></h1>
+        <select  class="chart-type-select" id="">
+            <option class="chart-option" selected value="bar" selected>Bar</option>
+            <option class="chart-option" value="pie">Pie</option>
+            <option class="chart-option" value="line">Line</option>
+        </select>
+        <div class="country-chart-container" style="position: relative; height:40vh; width:80vw">
+            <canvas id="country-chart" responsive="true"></canvas>
+        </div>
+
+    </section>
 </body>
+
 </html>

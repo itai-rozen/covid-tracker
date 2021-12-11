@@ -1,0 +1,57 @@
+section {
+    background-color: white;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+
+.hide {
+    display: none;
+}
+
+.inputs-container {
+    width: 100%;
+    justify-content: space-around;
+    background-color: red;
+}
+
+.continent-chart-container {
+    position: relative; 
+    margin: 0 auto;
+    width: 100%;
+}
+
+#continent-chart {
+    position: absolute;
+    width: 85vw;
+}
+
+
+.stats-option-list {
+    height: 10vh;
+    justify-content: space-evenly;
+}
+
+
+.radio {
+    margin: 0 auto;
+    width: 90%;
+    visibility: hidden;
+}
+
+.radio:checked + label {
+    background-color: yellow;
+}
+.radio-label {
+    margin: 0 auto;
+    height: 100%;
+    cursor: pointer;
+    background-color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+
+
+
