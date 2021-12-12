@@ -38,7 +38,7 @@ function makeChart(elementId) {
     const myChart = document.getElementById(elementId).getContext('2d')
 
     let chartCtx = new Chart(myChart, {
-        type: currSelectedChartTypeInput, // pie,  line, doughnut, radar, polararea
+        type: currSelectedChartTypeInput, 
         data: {
             labels: chartLabels,
             datasets: [{
@@ -75,7 +75,7 @@ function makeChart(elementId) {
     appData.chart = chartCtx
 }
 
-// 
+
 
 function getStatsByCategory(countryObjs, category) {
     return (category === 'overall') ? Object.values(appData.continentCovidStats) :

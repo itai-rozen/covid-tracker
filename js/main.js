@@ -96,5 +96,3 @@ function getContinentStats(casesObjs){
     return sumObj
 }
 
-
-// runStats()
