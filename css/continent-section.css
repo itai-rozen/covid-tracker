@@ -53,7 +53,7 @@ section {
     align-items: center;
 }
 
-.radio-continent{
+input[type="radio"]{
 display: none;
 }
 
