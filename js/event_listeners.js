@@ -59,7 +59,7 @@ function updateCountriesSelectInput(names){
     const strHtmls = names.map(name => `
     <option class="country-option" value="${name}">${name}</option>
     `)
-    selectInputElement.innerHTML += strHtmls.join('')
+    selectInputElement.innerHTML =`<option class="default-option" value="" disabled selected hidden>Choose country</option>`+strHtmls.join('')
     selectInputElement.addEventListener('change', makeCountryChart)
 }
 

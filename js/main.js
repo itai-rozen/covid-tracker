@@ -29,7 +29,7 @@ async function getRegionCovidData(e) {
     const url = `https://intense-mesa-62220.herokuapp.com/https://restcountries.herokuapp.com/api/v1/region/${regionUserInput}`
     let countriesCodes
     if (!localStorage.getItem(regionUserInput)) {
-        const regionData = await axios.get(url)
+        const regionData = await axios.get(url).catch(err => console.log(err))
         countriesCodes = getCountriesCodes(regionData)
         localStorage.setItem(regionUserInput, JSON.stringify(countriesCodes))
     } else countriesCodes = JSON.parse(localStorage.getItem(regionUserInput))
