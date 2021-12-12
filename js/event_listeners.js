@@ -37,13 +37,11 @@ function activateRadioButtons(type){
 function addSelectEventListeners(){
 
 const optionSelectInputs = (appData.isMobile)? dqsa('.mobile-chart-option') :  dqsa('.chart-option')
-console.log('select inputs: ', optionSelectInputs)
 optionSelectInputs.forEach(option => {
     if (option.selected) appData.currSelectedChartTypeInput = option.value
 })
 
 const selectInputs = (appData.isMobile)? dqsa('.mobile-chart-type-select') : dqsa('.chart-type-select')
-console.log('select inputs: ',selectInputs)
 selectInputs.forEach(input => input.addEventListener('change', setNewValueAndDrawChart))
 
 }
@@ -80,7 +78,6 @@ dqs('.back-choose').addEventListener('click', () => {
     scrollToSectionElement('.continent-chart-section','.choose-continent')
 })
 
-// console.log(appData)
 
 
 

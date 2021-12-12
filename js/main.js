@@ -20,7 +20,6 @@ const appData = {
 
 async function getRegionCovidData(e) {
     const spinnerElement = dqs('.spinner-container')
-    console.log('event target: ',e.target)
     removeClass(spinnerElement,'hide')
     if (e.type !== "click") appData.isMobile = true
     addSelectEventListeners()
@@ -35,19 +34,15 @@ async function getRegionCovidData(e) {
         localStorage.setItem(regionUserInput, JSON.stringify(countriesCodes))
     } else countriesCodes = JSON.parse(localStorage.getItem(regionUserInput))
     
-    // console.log(countriesCodes)
     countriesCodes = countriesCodes.filter(country => country.code !== 'XK')
     const countriesCovidData = await getCovidData(countriesCodes)
-    // localStorage.setItem('temp_covid_data', JSON.stringify(countriesCovidData))
     runStats(countriesCovidData)
     addClass(spinnerElement,'hide')
     scrollToSectionElement('.choose-continent','.continent-chart-section')
 }
 
-// getRegionCovidData()
 
 function getCountriesCodes(region) {
-    // console.log(region)
     return region.data.map(country => {
         const { name, cca2 } = country
         return {
@@ -67,9 +62,7 @@ async function getCovidData(countryCodesArr) {
 }
 
 function runStats(countries) {
-    // const countries = JSON.parse(localStorage.getItem('temp_covid_data'))
     const countriesStats = getCountryCovidStats(countries)
-    // console.log('with timeline: ',countriesStats)
     const continentStats = getContinentStats(countriesStats)
     appData.countriesCovidStats = countriesStats
     appData.continentCovidStats = continentStats

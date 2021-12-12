@@ -24,8 +24,6 @@ function makeChart(elementId) {
     const countriesNames = getStatsByCategory(countriesCovidStats, 'name')
     let chartLabels
 
-    console.log('current select input: ',appData.currSelectedChartTypeInput)
-    console.log('is mobile? ',appData.isMobile)
     if (chartResolution === 'continent-chart') {
         if (currCheckedStatCategoryInput === 'overall') {
             chartLabels = Object.keys(continentCovidStats)
