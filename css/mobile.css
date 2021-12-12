@@ -1,0 +1,84 @@
+.world {
+    display: none;
+}
+
+.world-mobile .main-header,
+.world-mobile .mobile-select {
+    display: inline-block;
+    position: unset;
+}
+.world-mobile {
+    height: 100vh;
+    display: flex;
+}
+
+h1 {
+    position: initial;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.mobile-select {
+    width: 70%;
+    font-size: 1.5rem;
+    margin: 50px;
+    border-width: 4px;
+}
+
+.mobile-select option {
+    font-size: 1rem;
+}
+
+.mobile-chart-type-select {
+    display: block;
+}
+
+.screen-option {
+    display: none;
+}
+
+.mobile-option {
+    display: block;
+}
+
+.inputs-container {
+    flex-direction: column-reverse;
+    margin: 0;
+}
+
+.select-inputs-wrapper{
+    display: flex;
+}
+.stats-option-list {
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+}
+
+.chart-type-select {
+    display: none;
+}
+
+.chart-type-select.country {
+    display: block;
+}
+.stats-option-list > li {
+    height: 20px;
+}
+
+.radio-label {
+    padding: 10px;
+    margin: 0;
+    font-size: 12px;
+    height: auto;
+    line-height: 10px;
+}
+
+select {
+    width: 80px;
+    display: inline;
+}
+.back {
+    font-size: 0.7rem;
+    margin: 20px;
+}

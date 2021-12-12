@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="css/world-map.css">
     <link rel="stylesheet" href="css/continent-section.css">
     <link rel="stylesheet" href="css/country-section.css">
+    <link rel="stylesheet" media="screen and (max-width:1000px)" href="css/landscape.css">
+    <link rel="stylesheet" media="screen and (max-width:500px)" href="css/mobile.css">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon-16x16.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
         integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
@@ -28,8 +32,9 @@
             <i class="fas fa-virus fa-10x"></i>
         </div>
     </div>
-    <main class="choose-continent">     
+    <main class="choose-continent"> 
         <div class="world">
+            <h1 class="main-header flex">Covid Tracker : <span class="computer-green">&nbsp; Choose Continent</span></h1>    
             <div data-continent="asia" class="continent asia">
                 <div data-continent="asia" class="continent-text"> Asia</div>
             </div>
@@ -39,77 +44,95 @@
             <div data-continent="africa" class="continent africa">
                 <div data-continent="africa" class="continent-text"> Africa</div>
             </div>
-            <div data-continent="americas" class="continent north-america">
-                <div data-continent="americas" class="continent-text"></div>
-            </div>
-            <div data-continent="americas" class="continent south-america">
+            <div data-continent="americas" class="continent america">
                 <div data-continent="americas" class="continent-text">America</div>
             </div>
             <div data-continent="oceania" class="continent australia">
                 <div data-continent="oceania" class="continent-text">Australia</div>
             </div>
         </div>
+        <div class="world-mobile flex col center">
+            <h1 class="main-header">Covid Tracker  </h1>    
+            <select  class="mobile-select" id="">
+                <option class="default-option" value="" disabled selected hidden>Continent</option>
+                <option class="continent" data-continent="asia" value="asia">Asia</option>
+                <option class="continent" data-continent="africa" value="africa">Africa</option>
+                <option class="continent" data-continent="americas" value="americas">America</option>
+                <option class="continent" data-continent="europe" value="europe">Europe</option>
+                <option class="continent" data-continent="oceania" value="oceania">Australia</option>
+            </select>
+        </div>
     </main>
     <section class="continent-chart-section hide flex col">
         <div class="inputs-container flex ">
 
             <ul class="stats-option-list flex center">
-                <li class="stat-item "><label for="radio-1" class="radio-label label-1">Recovered</label><input
-                        type="radio" id="radio-1" value="recovered" class="radio-continent"></li>
-                <li class="stat-item "><label for="radio-2" class="radio-label label-2">Confirmed</label><input
-                        type="radio" id="radio-2" value="confirmed" checked class="radio-continent"></li>
-                <li class="stat-item "><label for="radio-3" class="radio-label label-3">Critical</label><input
-                        type="radio" id="radio-3" value="critical" class="radio-continent"></li>
-                <li class="stat-item "><label for="radio-4" class="radio-label label-4">Deaths</label>
-                    <input type="radio" id="radio-4" value="deaths" class="radio-continent"></li>
-                <li class="stat-item "><label for="radio-5" class="radio-label label-4">Overall</label>
-                    <input type="radio" id="radio-5" value="overall" class="radio-continent"></li>
+                <li class="stat-item flex"><label for="radio-1" class="radio-label label-1">Recovered</label><input
+                        type="radio" id="radio-1" value="recovered" name="radio-continent" class="radio-continent"></li>
+                <li class="stat-item flex "><label for="radio-2" class="radio-label label-2">Confirmed</label><input
+                        type="radio" id="radio-2" value="confirmed" name="radio-continent" checked class="radio-continent"></li>
+                <li class="stat-item flex"><label for="radio-3" class="radio-label label-3">Critical</label><input
+                        type="radio" id="radio-3" value="critical" name="radio-continent" class="radio-continent"></li>
+                <li class="stat-item flex"><label for="radio-4" class="radio-label label-4">Deaths</label>
+                    <input type="radio" id="radio-4" value="deaths" name="radio-continent" class="radio-continent"></li>
+                <li class="stat-item flex"><label for="radio-5" class="radio-label label-4">Overall</label>
+                    <input type="radio" id="radio-5" value="overall" name="radio-continent" class="radio-continent"></li>
             </ul>
-            <label class="flex">Chart type
+
+            <label class="chart-type-label flex">
                 <select  class="chart-type-select" id="">
-                    <option class="chart-option" selected value="bar" selected>Bar</option>
+                    <option class="chart-option "  value="bar" selected>Bar</option>
                     <option class="chart-option" value="pie">Pie</option>
                     <option class="chart-option" value="line">Line</option>
                     <option class="chart-option" value="polarArea">Polar Area</option>
                     <option class="chart-option" value="radar">Radar</option>
                     <option class="chart-option" value="doughnut">Doughnut</option>
                 </select>
+                <select  class="mobile-chart-type-select" id="">
+                    <option class="mobile-chart-option" selected value="pie">Pie</option>
+                    <option class="mobile-chart-option" value="polarArea">Polar Area</option>
+                    <option class="mobile-chart-option" value="radar">Radar</option>
+                    <option class="mobile-chart-option" value="doughnut">Doughnut</option>
+                </select>
             </label>
-            <label>Get more information on</label>
+            
             <select class="countries-select" >
                 <option class="default-option" value="" disabled selected hidden>Choose country</option>
             </select>
-            <div class="pointer back-choose"><i class="fas fa-angle-double-up"></i></div>
+            <div class="pointer back back-choose"><i class="fas fa-angle-double-up fa-3x"></i></div>
+
         </div>
 
-        <div class="continent-chart-container" style="position: relative; height:40vh; width:80vw">
+        <div class="continent-chart-container">
             <canvas id="continent-chart" responsive="true"></canvas>
         </div>
 
 
 
     </section>
-    <section class="country-section hide flex col">
-        <h1 class="country-header"></h1>
-        <h2 class="population-header">Population : <span class="country-population"></span></h2>
-        <h2 class="updated-header">Last Updated: <span class="country-updated"></span></h2>
-        <div class="inputs-container flex">
-            <select  class="chart-type-select country" id="">
-                <option class="chart-option" selected value="bar" selected>Bar</option>
-                <option class="chart-option" value="pie">Pie</option>
-                <option class="chart-option" value="line">Line</option>
+    <section class="country-section hide  flex col">
+        <div class="wrapper flex space-between">
+        <div class="headers-container">    
+            <h1 class="country-header"></h1>
+        </div>
+        <div class="inputs-container country flex space-between">
+            <select  class="mobile-chart-type-select screen chart-type-select country" id="">
+                <option class="mobile-chart-option chart-option" selected value="bar" >Bar</option>
+                <option class="mobile-chart-option chart-option" value="pie">Pie</option>
+                <option class="mobile-chart-option chart-option" value="line">Line</option>
             </select>
             <ul class="stats-option-list country hide flex center">
                 <li class="stat-item "><label for="radio-6" class="radio-label label-1">Recovered</label><input
-                        type="radio" id="radio-6" value="new_recovered" class="radio-country"></li>
+                        type="radio" name="radio-country" id="radio-6" value="new_recovered" class="radio-country"></li>
                 <li class="stat-item "><label for="radio-7" class="radio-label label-2">Confirmed</label><input
-                        type="radio" id="radio-7" value="new_confirmed"  class="radio-country"></li>
+                        type="radio" name="radio-country" id="radio-7" value="new_confirmed"  class="radio-country"></li>
                 <li class="stat-item "><label for="radio-8" class="radio-label label-4">Deaths</label>
-                    <input type="radio" id="radio-8" value="deaths" checked class="radio-country"></li>
+                    <input type="radio" name="radio-country" id="radio-8" value="deaths" checked class="radio-country"></li>
             </ul>
-            <div class="pointer back-continent"><i class="fas fa-angle-double-up"></i></div>
+            <div class="pointer back back-continent"><i class="fas fa-angle-double-up fa-3x"></i></div>
         </div>
-        <div class="country-chart-container" style="position: relative; height:40vh; width:80vw">
+    </div>
+        <div class="country-chart-container">
             <canvas id="country-chart" responsive="true"></canvas>
         </div>
 

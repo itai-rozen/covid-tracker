@@ -1,3 +1,13 @@
+
+
+.headers-container {
+    margin-left: 20px;
+}
+.inputs-container.country { 
+    justify-content: space-between;
+    width: 50%;
+}
+
 .country-chart-container {
     position: relative; 
     margin: 0 auto;
@@ -6,5 +16,13 @@
 
 #country-chart {
     position: absolute;
-    width: 85vw;
+    height: 90vh;
+}
+
+.country-section .back {
+    margin-right: 20px;
+}
+
+.chart-type-label {
+    border: none;
 }

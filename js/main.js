@@ -1,4 +1,5 @@
 const appData = {
+    isMobile: false,
     chart: null,
     chartResolution:'continent-chart',
     chosenContinent: '',
@@ -19,8 +20,12 @@ const appData = {
 
 async function getRegionCovidData(e) {
     const spinnerElement = dqs('.spinner-container')
+    console.log('event target: ',e.target)
     removeClass(spinnerElement,'hide')
-    const regionUserInput = (e.target.getAttribute('data-continent'))
+    if (e.type !== "click") appData.isMobile = true
+    addSelectEventListeners()
+    const regionUserInput = (e.type === 'click') ? (e.target.getAttribute('data-continent')) : 
+                                                    (e.target.value)
     appData.chosenContinent = regionUserInput
     const url = `https://intense-mesa-62220.herokuapp.com/https://restcountries.herokuapp.com/api/v1/region/${regionUserInput}`
     let countriesCodes
@@ -30,7 +35,7 @@ async function getRegionCovidData(e) {
         localStorage.setItem(regionUserInput, JSON.stringify(countriesCodes))
     } else countriesCodes = JSON.parse(localStorage.getItem(regionUserInput))
     
-    console.log(countriesCodes)
+    // console.log(countriesCodes)
     countriesCodes = countriesCodes.filter(country => country.code !== 'XK')
     const countriesCovidData = await getCovidData(countriesCodes)
     // localStorage.setItem('temp_covid_data', JSON.stringify(countriesCovidData))
@@ -42,7 +47,7 @@ async function getRegionCovidData(e) {
 // getRegionCovidData()
 
 function getCountriesCodes(region) {
-    console.log(region)
+    // console.log(region)
     return region.data.map(country => {
         const { name, cca2 } = country
         return {
@@ -64,7 +69,7 @@ async function getCovidData(countryCodesArr) {
 function runStats(countries) {
     // const countries = JSON.parse(localStorage.getItem('temp_covid_data'))
     const countriesStats = getCountryCovidStats(countries)
-    console.log('with timeline: ',countriesStats)
+    // console.log('with timeline: ',countriesStats)
     const continentStats = getContinentStats(countriesStats)
     appData.countriesCovidStats = countriesStats
     appData.continentCovidStats = continentStats

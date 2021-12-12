@@ -1,5 +1,4 @@
 function makeChart(elementId) {
-    console.log('hi chart maker')
     if (appData.chart) appData.chart.destroy()
     const countryRadioInputElement = dqs('.stats-option-list.country')
 
@@ -11,8 +10,6 @@ function makeChart(elementId) {
         
     }
     else addClass(countryRadioInputElement, 'hide')
-    console.log('continent covid stats: ', continentCovidStats)
-    console.log('continent keys: ', Object.keys(continentCovidStats))
     let chartStats
     if (chartResolution === 'continent-chart') {
         activateRadioButtons('continent')
@@ -22,13 +19,13 @@ function makeChart(elementId) {
         if (currSelectedChartTypeInput === 'line') chartStats = getTimelineChart('stats', chosenCountry.timeline)
         else chartStats = Object.values(chosenCountry.chartData)
     }
-    console.log('chart stats: ', chartStats)
 
 
     const countriesNames = getStatsByCategory(countriesCovidStats, 'name')
     let chartLabels
-    // console.log('country names:',countriesNames)
 
+    console.log('current select input: ',appData.currSelectedChartTypeInput)
+    console.log('is mobile? ',appData.isMobile)
     if (chartResolution === 'continent-chart') {
         if (currCheckedStatCategoryInput === 'overall') {
             chartLabels = Object.keys(continentCovidStats)
@@ -37,15 +34,10 @@ function makeChart(elementId) {
         if (currSelectedChartTypeInput === "line") chartLabels = getTimelineChart('labels', chosenCountry.timeline)
         else chartLabels = Object.keys(chosenCountry.chartData)
     }
-    console.log('chart labels: ', chartLabels)
 
-
+    const chartColors = chartLabels.map(_ => getRandomColor())
     if (chartResolution === 'continent-chart') updateCountriesSelectInput(countriesNames)
-    // console.log('countries stats: ',countriesStats)
-    // console.log('chart stats by selected category: ', chartStats)
-    // console.log('app data: ', appData)
     const myChart = document.getElementById(elementId).getContext('2d')
-    // console.log('stats: ',countriesStats)
 
     let chartCtx = new Chart(myChart, {
         type: currSelectedChartTypeInput, // pie,  line, doughnut, radar, polararea
@@ -53,16 +45,41 @@ function makeChart(elementId) {
             labels: chartLabels,
             datasets: [{
                 label: currCheckedStatCategoryInput,
-                data: chartStats
+                data: chartStats,
+                axis: (appData.isMobile)? 'y' : 'x',
+                backgroundColor: chartColors,
+                borderWidth: 2,
+                borderColor: '#ccc',
+                hoverBorderColor: '#fff'
             }]
+        },
+        options: {
+            indexAxis: (appData.isMobile)?  'y' : 'x',
+            aspectRatio: (appData.isMobile) ? 1 : 2.5,
+            plugins:{
+                title: {
+                    display: true,
+                    text:  (chartResolution === 'country-chart' )?  
+                    `Population: ${appData.chosenCountry.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}. 
+                     Last updated: ${new Date(appData.chosenCountry.updated).toLocaleString()}`: 
+                     '',
+                    color: '#1ADB98',
+                    position: 'bottom',
+                    padding: 15,
+                    font: {
+                        size: 30
+                    }
+                }
+            }
         }
+
     })
     appData.chart = chartCtx
 }
 
+// 
+
 function getStatsByCategory(countryObjs, category) {
-    console.log('@get stats by category - country objects: ',countryObjs)
-    console.log('@get stats by category - category: ',category)
     return (category === 'overall') ? Object.values(appData.continentCovidStats) :
         countryObjs.map(country => country[category])
 }
@@ -76,12 +93,11 @@ function makeCountryChart(e) {
     const countryStats = appData.countriesCovidStats.find(country => country.name === appData.chosenCountry.name)
     const { confirmed, critical, deaths, recovered, name, population, updated_at, timeline } = countryStats
     appData.chosenCountry.chartData = { confirmed, critical, deaths, recovered }
+    appData.chosenCountry.name = name
     appData.chosenCountry.population = population
     appData.chosenCountry.updated = updated_at
     appData.chosenCountry.timeline = timeline
     dqs('.country-header').textContent = name
-    dqs('.country-population').textContent = population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    dqs('.country-updated').textContent = new Date(updated_at).toLocaleString()
     appData.chartResolution = 'country-chart'
     makeChart(appData.chartResolution)
 }
@@ -90,7 +106,6 @@ function getTimelineChart(chartField, timelineData) {
     if (chartField === 'labels') {
         const timelineDates =  timelineData.map(timelineObj =>  timelineObj.date)
         return timelineDates
-        // console.log('timeline dates: ',timelineDates)
     } else {
         return getStatsByCategory(timelineData, appData.currCheckedStatCategoryInput).reverse() 
     }

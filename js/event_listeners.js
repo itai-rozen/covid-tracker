@@ -10,6 +10,9 @@ continentElements.forEach(el => {
     el.addEventListener('click', getRegionCovidData)
 })
 
+const mobileSelectElement = dqs('.mobile-select')
+mobileSelectElement.addEventListener('change',getRegionCovidData)
+
 function scrollToSectionElement(fromClass, toClass){
     const fromElemet = dqs(fromClass)
     const toElement = dqs(toClass)
@@ -21,29 +24,29 @@ function scrollToSectionElement(fromClass, toClass){
 }
 
 function activateRadioButtons(type){
-    console.log('hello activate')
     const statItemsElements = dqsa(`.radio-${type}`)
     statItemsElements.forEach(radioButton => {
         if (radioButton.checked){
             appData.currCheckedStatCategoryInput = radioButton.value
-            console.log('found checked radio button! ', radioButton, radioButton.value)
         } 
         radioButton.addEventListener('click',setNewValueAndDrawChart)
     })
-    console.log('current cateory input: ',appData.currCheckedStatCategoryInput)
 }
     
 
+function addSelectEventListeners(){
 
-
-const optionSelectInputs = dqsa('.chart-option')
+const optionSelectInputs = (appData.isMobile)? dqsa('.mobile-chart-option') :  dqsa('.chart-option')
+console.log('select inputs: ', optionSelectInputs)
 optionSelectInputs.forEach(option => {
     if (option.selected) appData.currSelectedChartTypeInput = option.value
 })
 
-const selectInputs = dqsa('.chart-type-select')
+const selectInputs = (appData.isMobile)? dqsa('.mobile-chart-type-select') : dqsa('.chart-type-select')
+console.log('select inputs: ',selectInputs)
 selectInputs.forEach(input => input.addEventListener('change', setNewValueAndDrawChart))
 
+}
 
 
 function setNewValueAndDrawChart(e){
@@ -66,8 +69,10 @@ function updateCountriesSelectInput(names){
 dqs('.back-continent').addEventListener('click', () => {
     appData.chart.destroy()
     dqs('.default-option').checked
-    makeChart('continent-chart')
     appData.chartResolution = 'continent-chart'
+    appData.currSelectedChartTypeInput = (appData.isMobile)? 'pie' : 'bar'
+    appData.currCheckedStatCategoryInput = 'confirmed'
+    makeChart('continent-chart')
     scrollToSectionElement('.country-section','.continent-chart-section')
 })
 dqs('.back-choose').addEventListener('click', () => {
@@ -75,7 +80,7 @@ dqs('.back-choose').addEventListener('click', () => {
     scrollToSectionElement('.continent-chart-section','.choose-continent')
 })
 
-console.log(appData)
+// console.log(appData)
 
 
 

@@ -1,0 +1,51 @@
+.spinner-container {
+    font-size: 0.5rem;
+}
+
+.main-header {
+    font-size: 2rem;
+}
+
+.world {
+    height: 100vh;
+}
+
+.world .continent-text {
+    opacity: 1;
+    transform: scale(0.5);
+}
+
+.radio-label {
+    font-size: 1rem;
+}
+
+.inputs-container {
+    margin: 0 10px;
+}
+
+.stats-option-list {
+    width: 50%  ;
+}
+
+.chart-type-label {
+    margin: 0;
+    padding: 0 5px;
+    border-left-width: 2px;
+}
+
+select {
+    margin: 0 5px;
+    padding: 5px 5px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    outline: none;  
+    width: 120px;
+    font-size: 0.7rem;  
+}
+
+.back {
+    font-size: 1rem;
+    margin-right: 10px;
+}
