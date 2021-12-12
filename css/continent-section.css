@@ -58,9 +58,12 @@ display: none;
 }
 
 
- input[type="radio"]:active + label {
-    background-color: white !important; 
-    color: white !important;
+input[type="radio"]:checked + label {
+    animation: 0.5s shine linear forwards; 
+}
+
+ input[type="radio"]:checked + label::after {
+    width: 100%;
 }
 .radio-label {
     position: relative;
@@ -132,6 +135,20 @@ display: none;
     }
     100% {
         transform: translateY(0px);
+    }
+}
+
+@keyframes shine {
+    0% {
+        text-shadow: 0 0 0 0;
+    }
+    50% {
+        text-shadow: 0 0 20px #fff;
+        color: #1bfB98;
+    }
+    100% {
+        text-shadow: var(--text-shadow);
+        color: var(--secondary-color);
     }
 }
 
