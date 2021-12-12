@@ -68,7 +68,7 @@ dqs('.back-continent').addEventListener('click', () => {
     appData.chart.destroy()
     dqs('.default-option').checked
     appData.chartResolution = 'continent-chart'
-    appData.currSelectedChartTypeInput = (appData.isMobile)? 'pie' : 'bar'
+    appData.currSelectedChartTypeInput = 'bar'
     appData.currCheckedStatCategoryInput = 'confirmed'
     makeChart('continent-chart')
     scrollToSectionElement('.country-section','.continent-chart-section')
