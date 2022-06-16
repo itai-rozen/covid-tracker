@@ -1,11 +1,17 @@
 # covid-tracker 
 
-# This is an app that gives covid stats for chosen countries\continents, displayed in charts.
+live demo: https://itai-rozen-covid-tracker.netlify.app/
+stack: js, html, css
 
-# charts made via "charts.js" external library.
+## This is an app that gives covid stats for chosen countries\continents, displayed in charts.
 
-# Go ahead and try various chart types!
+## charts made via "charts.js" external library.
 
-# After choosing a specific country, try the "timeline" option. also try it with different stats category!
+## Apis used
+- https://restcountries.herokuapp.com/api/v1/region - country codes  list
+- https://corona-api.com/countries/ - corona stats by country code
+### Go ahead and try various chart types!
 
-# Responsive for mobile. Portrait & Landscape. 
+### After choosing a specific country, try the "timeline" option. also try it with different stats category!
+
+### Responsive for mobile. Portrait & Landscape. 
